@@ -21,16 +21,18 @@
 
 .stat-value {
   font-family: var(--font-primary);
-  font-weight: 800;
-  color: var(--color-white);
+  font-size: var(--font-h2);
+  font-weight: 700;
+  color: var(--gray-50);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .stat-unit {
   font-family: var(--font-primary);
-  font-weight: 600;
-  font-size: 0.5em;
+  font-size: var(--font-body-sm);
   color: var(--gray-500);
-  text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* Sizes */

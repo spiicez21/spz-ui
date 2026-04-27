@@ -10,27 +10,31 @@
 }
 
 body {
-  font-family: var(--font-secondary);
-  font-size: var(--font-body);
-  background-color: #050505; /* Deeper black */
-  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: var(--font-body-sm);
+  background-color: var(--gray-950);
+  color: var(--gray-50);
   min-height: 100vh;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, .font-primary {
-  font-family: var(--font-primary);
+h1, h2, h3, h4 {
+  color: var(--gray-50);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-branding {
+  font-family: var(--font-branding);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 
 button {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   cursor: pointer;
-  border: none;
-  background: none;
-  transition: all var(--anim-fast) var(--anim-ease);
 }
 
 .glass {
@@ -42,18 +46,22 @@ button {
   border: 1px solid var(--gray-800);
 }
 
-/* Base Scrollbar - Flat */
+/* Utilities */
+.text-muted { color: var(--gray-400); }
+.text-primary { color: var(--color-primary); }
+
+/* Base Scrollbar - Shadcn Style */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--gray-900);
+  background: var(--gray-950);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--gray-700);
+  background: var(--gray-800);
   border-radius: var(--radius-pill);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--gray-700);
 }

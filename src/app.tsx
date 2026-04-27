@@ -79,16 +79,16 @@ export function App() {
         </div>
       )}
 
-      <header className="flex items-center justify-between border-subtle p-md rounded-sm bg-gray-900">
+      <header className="flex items-center justify-between border-subtle p-md rounded-lg bg-gray-950">
         <div className="flex items-center gap-16">
-          <h1 className="text-h4 font-primary text-primary">SPZ CORE</h1>
-          <div className="w-1 h-12 bg-gray-700" />
+          <h1 className="text-h4 font-branding text-primary">SPZ CORE</h1>
+          <div className="w-1 h-12 bg-gray-800" />
           <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} variant="pills" />
         </div>
         <div className="flex items-center gap-12">
           <div className="text-right">
-            <div className="font-primary text-body-sm">SPICEZ</div>
-            <div className="text-caption text-gray-500">ELITE RACER</div>
+            <div className="font-semibold text-body-sm">SPICEZ</div>
+            <div className="text-caption text-muted uppercase tracking-wider">ELITE RACER</div>
           </div>
           <Avatar name="John Doe" status="online" size="sm" />
         </div>
@@ -97,20 +97,20 @@ export function App() {
       {activeTab === 'race' && (
         <div className="grid grid-cols-12 gap-16">
           <div className="col-span-8 flex flex-col gap-16">
-            <section className="grid grid-cols-3 gap-8">
+            <section className="grid grid-cols-3 gap-16">
               <StatsCard title="SPEED" value="342" unit="KMH" trend="up" trendValue="12" icon={Activity} />
               <StatsCard title="WINS" value="128" icon={Trophy} />
               <StatsCard title="BANK" value="1.2M" unit="$" trend="up" trendValue="5" icon={Trophy} />
             </section>
 
-            <Card title="TELEMETRY" variant="default">
+            <Card title="ACTIVE TELEMETRY">
               <div className="grid grid-cols-2 gap-32">
                 <div className="flex flex-col gap-12">
                   <ProgressBar value={75} label="NITROUS" variant="primary" />
                   <ProgressBar value={40} label="FUEL" variant="warning" />
                   <ProgressBar value={92} label="ENGINE" variant="error" />
                 </div>
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-16">
                   <Prompt label="BOOST" keys={['SHIFT']} className="w-full" />
                   <Prompt label="DRIFT" keys={['SPACE']} className="w-full" />
                 </div>
@@ -120,13 +120,13 @@ export function App() {
 
           <div className="col-span-4 flex flex-col gap-16">
             <Card title="GARAGE">
-              <div className="flex flex-col gap-12">
+              <div className="flex flex-col gap-16">
                 <Input placeholder="SEARCH MODEL..." icon={Search} />
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-12">
                   <Switch checked={switchState} onChange={setSwitchState} label="AUTO REPAIR" />
                   <Switch checked={false} onChange={() => {}} label="DATA LOGS" />
                 </div>
-                <div className="h-1 bg-gray-800 my-4" />
+                <Separator />
                 <Button onClick={() => setIsModalOpen(true)} className="w-full" variant="secondary">VEHICLE STATS</Button>
                 <Button className="w-full" onClick={() => setShowToast(true)}>TRIGGER TOAST</Button>
               </div>
