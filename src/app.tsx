@@ -11,7 +11,6 @@ import { Prompt } from './components/Prompt'
 import { Input } from './components/Input'
 import { Switch } from './components/Switch'
 import { Table } from './components/Table'
-import { Badge } from './components/Badge'
 import { Activity, Trophy, Settings, User, Mail, Search, Clock } from 'lucide-preact'
 import './app.css'
 
