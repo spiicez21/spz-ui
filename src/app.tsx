@@ -20,7 +20,7 @@ import { Spinner } from './components/Spinner'
 import { Toast } from './components/Toast'
 import { Stack } from './components/Stack'
 import { StatNumber } from './components/StatNumber'
-import { Activity, Trophy, Settings, User, Mail, Search, Clock, Bell, Info, CheckCircle, AlertTriangle, XCircle, Layout, MousePointer2 } from 'lucide-preact'
+import { Activity, Trophy, Settings, User, Search, Bell, Layout, MousePointer2 } from 'lucide-preact'
 import './app.css'
 
 export function App() {
@@ -70,12 +70,10 @@ export function App() {
     <main className="app-container p-lg flex flex-col gap-24">
       {showToast && (
         <div className="fixed top-24 right-24 z-[700]">
-          <Toast 
-            type="success" 
-            title="SYSTEM UPDATE" 
-            message="Vehicle engine maps successfully updated." 
+          <Toast
+            type="success"
+            message="Engine maps successfully updated."
             onClose={() => setShowToast(false)}
-            icon={CheckCircle}
           />
         </div>
       )}
