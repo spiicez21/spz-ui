@@ -35,23 +35,16 @@
 
 .spz-button.primary:hover:not(:disabled) {
   background-color: var(--color-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.3);
-}
-
-.spz-button.primary:active:not(:disabled) {
-  transform: translateY(0);
 }
 
 .spz-button.secondary {
-  background-color: var(--gray-800);
+  background-color: var(--gray-700);
   color: var(--color-white);
-  border: 1px solid var(--gray-700);
+  border: 1px solid var(--gray-600);
 }
 
 .spz-button.secondary:hover:not(:disabled) {
-  background-color: var(--gray-700);
-  border-color: var(--gray-600);
+  background-color: var(--gray-600);
 }
 
 .spz-button.outline {

@@ -36,16 +36,6 @@
 }
 
 .progress-fill.primary { background-color: var(--color-primary); }
-.progress-fill.success { background-color: #10b981; }
-.progress-fill.warning { background-color: #f59e0b; }
-.progress-fill.error { background-color: #ef4444; }
-
-.progress-glow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4));
-  filter: blur(4px);
-}
+.progress-fill.success { background-color: #059669; }
+.progress-fill.warning { background-color: #d97706; }
+.progress-fill.error { background-color: #dc2626; }
