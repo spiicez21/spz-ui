@@ -3,10 +3,28 @@ import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { Badge } from './components/Badge'
 import { ProgressBar } from './components/ProgressBar'
+import { Tabs } from './components/Tabs'
+import { StatsCard } from './components/StatsCard'
+import { Avatar } from './components/Avatar'
+import { Modal } from './components/Modal'
+import { Prompt } from './components/Prompt'
+import { Input } from './components/Input'
+import { Switch } from './components/Switch'
+import { Activity, Trophy, Settings, User, Mail, Search } from 'lucide-preact'
 import './app.css'
 
 export function App() {
   const [loading, setLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('race')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [switchState, setSwitchState] = useState(true)
+
+  const tabs = [
+    { id: 'race', label: 'RACING', icon: Activity },
+    { id: 'leaderboard', label: 'LEADERBOARD', icon: Trophy },
+    { id: 'profile', label: 'PROFILE', icon: User },
+    { id: 'settings', label: 'SETTINGS', icon: Settings },
+  ]
 
   const simulateLoading = () => {
     setLoading(true)
@@ -15,53 +33,80 @@ export function App() {
 
   return (
     <main className="app-container p-lg">
-      <header className="mb-64">
-        <h1 className="text-hero mb-8">SPZ CORE UI</h1>
-        <p className="text-gray-400">PREMIUM MOTORSPORT DESIGN SYSTEM</p>
+      <header className="mb-32 flex items-center justify-between">
+        <div>
+          <h1 className="text-hero mb-8">SPZ CORE UI</h1>
+          <p className="text-gray-400">PREMIUM MOTORSPORT DESIGN SYSTEM</p>
+        </div>
+        <div className="flex items-center gap-16">
+          <Avatar name="John Doe" status="online" size="md" />
+          <div className="text-right">
+            <div className="font-primary text-body">SPICEZ</div>
+            <div className="text-caption text-primary">ELITE RACER</div>
+          </div>
+        </div>
       </header>
 
-      <section className="grid-2 gap-32 mb-64">
-        <Card title="BUTTON SYSTEM" subtitle="Interactive Elements" variant="glass">
-          <div className="flex flex-col gap-16">
-            <div className="flex gap-12">
-              <Button onClick={() => alert('Primary Clicked')}>PRIMARY ACTION</Button>
-              <Button variant="secondary">SECONDARY</Button>
-            </div>
-            <div className="flex gap-12">
-              <Button variant="outline" size="sm">OUTLINE SM</Button>
-              <Button variant="ghost" size="sm">GHOST SM</Button>
-              <Button variant="danger" size="sm">DANGER</Button>
-            </div>
-            <div className="flex gap-12">
-              <Button loading={loading} onClick={simulateLoading} className="w-full">
-                {loading ? 'LOADING...' : 'TEST LOADING STATE'}
-              </Button>
-            </div>
-          </div>
-        </Card>
+      <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} className="mb-32" />
 
-        <Card title="STATUS INDICATORS" subtitle="Real-time Feedback" variant="default">
+      {activeTab === 'race' && (
+        <div className="flex flex-col gap-32">
+          <section className="grid-3 gap-16">
+            <StatsCard title="TOP SPEED" value="342" unit="KM/H" trend="up" trendValue="12%" icon={Activity} />
+            <StatsCard title="RACES WON" value="128" trend="neutral" trendValue="--" icon={Trophy} />
+            <StatsCard title="TOTAL EARNINGS" value="1.2M" unit="$" trend="up" trendValue="5%" icon={Trophy} />
+          </section>
+
+          <section className="grid-2 gap-32">
+            <Card title="RACING HUD" subtitle="Active Modules" variant="glass">
+              <div className="flex flex-col gap-24">
+                <ProgressBar value={75} label="NOS LEVEL" variant="primary" showValue />
+                <ProgressBar value={40} label="FUEL" variant="warning" showValue />
+                <div className="flex gap-16 mt-8">
+                  <Prompt label="BOOST" keys={['SHIFT']} />
+                  <Prompt label="DRIFT" keys={['SPACE']} />
+                  <Prompt label="MAP" button="SELECT" />
+                </div>
+              </div>
+            </Card>
+
+            <Card title="GARAGE CONTROLS" subtitle="Vehicle Management" variant="default">
+              <div className="flex flex-col gap-16">
+                <Input label="SEARCH VEHICLE" placeholder="Enter name..." icon={Search} />
+                <div className="flex flex-col gap-12 mt-8">
+                  <Switch checked={switchState} onChange={setSwitchState} label="AUTO-REPAIR ENGINE" />
+                  <Switch checked={false} onChange={() => {}} label="ENABLE TELEMETRY LOGS" />
+                </div>
+                <Button onClick={() => setIsModalOpen(true)} className="mt-16">OPEN VEHICLE STATS</Button>
+              </div>
+            </Card>
+          </section>
+        </div>
+      )}
+
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        title="VEHICLE STATISTICS"
+        size="lg"
+      >
+        <div className="grid-2 gap-24">
           <div className="flex flex-col gap-16">
-            <div className="flex items-center gap-12">
-              <span className="text-body-sm text-gray-400 w-24">RACE</span>
-              <Badge variant="primary" size="md">LIVE</Badge>
-              <Badge variant="success" size="md">COMPLETED</Badge>
-              <Badge variant="error" size="md">ABORTED</Badge>
-            </div>
-            <div className="flex items-center gap-12">
-              <span className="text-body-sm text-gray-400 w-24">USER</span>
-              <Badge variant="secondary" size="sm">ADMIN</Badge>
-              <Badge variant="warning" size="sm">PROVISIONAL</Badge>
-              <Badge variant="outline" size="sm">OFFLINE</Badge>
-            </div>
-            <div className="flex flex-col gap-8 mt-8">
-              <ProgressBar value={75} label="NOS LEVEL" variant="primary" showValue />
-              <ProgressBar value={40} label="FUEL" variant="warning" showValue />
-              <ProgressBar value={92} label="ENGINE TEMP" variant="error" showValue />
+            <img src="https://images.unsplash.com/photo-1544636331-e268592033c2?q=80&w=400&auto=format&fit=crop" className="rounded-md" alt="Car" />
+            <h3 className="text-h3">ANNIS ELEGY RH8</h3>
+          </div>
+          <div className="flex flex-col gap-12">
+            <ProgressBar value={85} label="ACCELERATION" />
+            <ProgressBar value={92} label="TOP SPEED" />
+            <ProgressBar value={65} label="HANDLING" />
+            <ProgressBar value={70} label="BRAKING" />
+            <div className="mt-16 flex gap-12">
+              <Button className="flex-1">UPGRADE</Button>
+              <Button variant="secondary" className="flex-1">CUSTOMIZE</Button>
             </div>
           </div>
-        </Card>
-      </section>
+        </div>
+      </Modal>
 
       <section className="mb-64">
         <Card title="TYPOGRAPHY SCALE" subtitle="Panchang & Poppins" variant="outline">
