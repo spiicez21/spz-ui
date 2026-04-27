@@ -12,7 +12,15 @@ import { Input } from './components/Input'
 import { Switch } from './components/Switch'
 import { Table } from './components/Table'
 import { Separator } from './components/Separator'
-import { Activity, Trophy, Settings, User, Mail, Search, Clock } from 'lucide-preact'
+import { IconButton } from './components/IconButton'
+import { Checkbox } from './components/Checkbox'
+import { Slider } from './components/Slider'
+import { Skeleton } from './components/Skeleton'
+import { Spinner } from './components/Spinner'
+import { Toast } from './components/Toast'
+import { Stack } from './components/Stack'
+import { StatNumber } from './components/StatNumber'
+import { Activity, Trophy, Settings, User, Mail, Search, Clock, Bell, Info, CheckCircle, AlertTriangle, XCircle, Layout, MousePointer2 } from 'lucide-preact'
 import './app.css'
 
 export function App() {
@@ -20,11 +28,14 @@ export function App() {
   const [activeTab, setActiveTab] = useState('race')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [switchState, setSwitchState] = useState(true)
+  const [checkboxState, setCheckboxState] = useState(true)
+  const [sliderValue, setSliderValue] = useState(75)
+  const [showToast, setShowToast] = useState(false)
 
   const tabs = [
     { id: 'race', label: 'RACE', icon: Activity },
     { id: 'leaderboard', label: 'RANK', icon: Trophy },
-    { id: 'profile', label: 'USER', icon: User },
+    { id: 'system', label: 'SYSTEM', icon: Layout },
     { id: 'settings', label: 'OPTS', icon: Settings },
   ]
 
@@ -54,13 +65,20 @@ export function App() {
     },
   ]
 
-  const simulateLoading = () => {
-    setLoading(true)
-    setTimeout(() => setLoading(false), 2000)
-  }
-
   return (
     <main className="app-container p-lg flex flex-col gap-24">
+      {showToast && (
+        <div className="fixed top-24 right-24 z-[700]">
+          <Toast 
+            type="success" 
+            title="SYSTEM UPDATE" 
+            message="Vehicle engine maps successfully updated." 
+            onClose={() => setShowToast(false)}
+            icon={CheckCircle}
+          />
+        </div>
+      )}
+
       <header className="flex items-center justify-between border-subtle p-md rounded-sm bg-gray-900">
         <div className="flex items-center gap-16">
           <h1 className="text-h4 font-primary text-primary">SPZ CORE</h1>
@@ -110,7 +128,7 @@ export function App() {
                 </div>
                 <div className="h-1 bg-gray-800 my-4" />
                 <Button onClick={() => setIsModalOpen(true)} className="w-full" variant="secondary">VEHICLE STATS</Button>
-                <Button className="w-full">START RACE</Button>
+                <Button className="w-full" onClick={() => setShowToast(true)}>TRIGGER TOAST</Button>
               </div>
             </Card>
           </div>
@@ -118,13 +136,112 @@ export function App() {
       )}
 
       {activeTab === 'leaderboard' && (
-        <Card title="GLOBAL LEADERBOARD" subtitle="S1 Race Season" variant="glass">
+        <Card title="GLOBAL RANKINGS" variant="glass">
           <Table 
             columns={leaderboardColumns} 
             data={leaderboardData} 
             onRowClick={(row) => console.log('Clicked row', row)} 
           />
         </Card>
+      )}
+
+      {activeTab === 'system' && (
+        <div className="grid grid-cols-12 gap-16">
+          {/* Column 1: Buttons & Inputs */}
+          <div className="col-span-4 flex flex-col gap-16">
+            <Card title="ACTIONS">
+              <Stack gap={12}>
+                <Button className="w-full">PRIMARY ACTION</Button>
+                <Button className="w-full" variant="secondary">SECONDARY ACTION</Button>
+                <Button className="w-full" variant="outline">OUTLINE ACTION</Button>
+                <Button className="w-full" variant="danger">DANGER ACTION</Button>
+                <div className="flex gap-8">
+                  <IconButton icon={Activity} variant="primary" size="sm" />
+                  <IconButton icon={Settings} variant="secondary" size="sm" />
+                  <IconButton icon={Bell} variant="outline" size="sm" />
+                  <IconButton icon={User} variant="ghost" size="sm" />
+                </div>
+              </Stack>
+            </Card>
+
+            <Card title="FORM ELEMENTS">
+              <Stack gap={16}>
+                <Input label="TEXT INPUT" placeholder="Enter text..." />
+                <Input label="WITH ICON" placeholder="Search..." icon={Search} />
+                <Switch checked={switchState} onChange={setSwitchState} label="TOGGLE SWITCH" />
+                <Checkbox checked={checkboxState} onChange={setCheckboxState} label="CHECKBOX OPTION" />
+                <Slider value={sliderValue} onChange={setSliderValue} label="SLIDER RANGE" />
+              </Stack>
+            </Card>
+          </div>
+
+          {/* Column 2: Feedback & Data */}
+          <div className="col-span-4 flex flex-col gap-16">
+            <Card title="FEEDBACK">
+              <Stack gap={16}>
+                <div className="flex gap-8">
+                  <Badge variant="primary">PRIMARY</Badge>
+                  <Badge variant="success">SUCCESS</Badge>
+                  <Badge variant="warning">WARNING</Badge>
+                  <Badge variant="error">ERROR</Badge>
+                </div>
+                <Separator />
+                <ProgressBar value={65} label="PROGRESS BAR" variant="primary" />
+                <div className="flex items-center gap-16">
+                  <Spinner size="md" />
+                  <span className="text-caption text-gray-500 uppercase">System Loading...</span>
+                </div>
+                <Separator />
+                <Stack gap={8}>
+                  <Skeleton width="100%" height={20} variant="text" />
+                  <Skeleton width="80%" height={40} variant="rect" />
+                  <div className="flex gap-8">
+                    <Skeleton width={32} height={32} variant="circle" />
+                    <Skeleton width={120} height={32} variant="rect" />
+                  </div>
+                </Stack>
+              </Stack>
+            </Card>
+
+            <Card title="AVATARS & STATUS">
+              <div className="flex flex-wrap gap-12">
+                <Avatar name="John Doe" size="xl" status="online" />
+                <Avatar name="Jane Smith" size="lg" status="away" />
+                <Avatar name="Admin" size="md" status="busy" />
+                <Avatar name="Guest" size="sm" status="offline" />
+              </div>
+            </Card>
+          </div>
+
+          {/* Column 3: Game HUD & Stats */}
+          <div className="col-span-4 flex flex-col gap-16">
+            <Card title="GAME HUD PROMPTS">
+              <Stack gap={12}>
+                <Prompt label="ENTER GARAGE" keys={['E']} />
+                <Prompt label="BOOST NITRO" keys={['SHIFT', 'SPACE']} />
+                <Prompt label="SWITCH VIEW" button="Y" />
+                <Prompt label="REAR VIEW" button="RT" />
+              </Stack>
+            </Card>
+
+            <Card title="STAT VARIATIONS">
+              <Stack gap={16}>
+                <StatNumber value="01:12.45" label="BEST LAP" size="md" />
+                <Separator />
+                <StatNumber value="24" label="POSITION" unit="/32" size="lg" />
+                <Separator />
+                <StatNumber value="185" label="TELEMETRY" unit="KM/H" trend="up" trendValue="12" size="sm" />
+              </Stack>
+            </Card>
+
+            <Card title="OVERLAYS">
+              <Stack gap={12}>
+                <Button variant="outline" className="w-full" onClick={() => setIsModalOpen(true)}>OPEN MODAL</Button>
+                <Button variant="outline" className="w-full" onClick={() => setShowToast(true)}>TRIGGER TOAST</Button>
+              </Stack>
+            </Card>
+          </div>
+        </div>
       )}
 
       <Modal 
