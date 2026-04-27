@@ -69,10 +69,52 @@
   --padding-md: 16px;
   --padding-lg: 24px;
 
-  /* Gap System */
-  --gap-8: 8px;
-  --gap-12: 12px;
-  --gap-16: 16px;
-  --gap-24: 24px;
-  --gap-32: 32px;
+  /* Z-Index Layers */
+  --z-base: 0;
+  --z-dock: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
+  --z-toast: 700;
+
+  /* Sound Tokens (Logical) */
+  --sound-hover: 'hover.wav';
+  --sound-click: 'click.wav';
+  --sound-error: 'error.wav';
+  --sound-success: 'success.wav';
+  --sound-open: 'open.wav';
+  --sound-close: 'close.wav';
+
+  /* Haptic Tokens (Logical) */
+  --haptic-light: 'light';
+  --haptic-medium: 'medium';
+  --haptic-heavy: 'heavy';
+  --haptic-error: 'error';
+  --haptic-success: 'success';
+
+  /* Theme Colors (Base is Dark) */
+  --bg-app: var(--color-black);
+  --bg-card: var(--gray-900);
+  --border-card: var(--gray-800);
+  --text-main: var(--color-white);
+  --text-muted: var(--gray-400);
+}
+
+/* Theme Variants */
+.theme-racing {
+  --color-primary: #FF6200;
+  --color-secondary: #FF9F63;
+}
+
+.theme-freeroam {
+  --color-primary: #00A3FF;
+  --color-secondary: #63CFFF;
+}
+
+.theme-admin {
+  --color-primary: #8B5CF6;
+  --color-secondary: #A78BFA;
 }
