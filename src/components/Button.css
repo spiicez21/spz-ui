@@ -2,10 +2,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: var(--radius-sm);
+  letter-spacing: 0.08em;
+  border-radius: 4px;
   transition: all var(--anim-fast) var(--anim-ease);
   position: relative;
   overflow: hidden;
@@ -13,18 +13,18 @@
 
 /* Sizes */
 .spz-button.sm {
-  padding: 8px 16px;
-  font-size: var(--font-body-sm);
+  padding: 6px 12px;
+  font-size: 10px;
 }
 
 .spz-button.md {
-  padding: 12px 24px;
-  font-size: var(--font-body);
+  padding: 8px 16px;
+  font-size: 11px;
 }
 
 .spz-button.lg {
-  padding: 16px 32px;
-  font-size: var(--font-body-lg);
+  padding: 12px 24px;
+  font-size: 13px;
 }
 
 /* Variants */

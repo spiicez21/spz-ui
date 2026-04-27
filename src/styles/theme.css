@@ -7,29 +7,29 @@
   --color-black: #000000;
   --color-white: #FFFFFF;
 
-  /* Grayscale */
-  --gray-50: #F9FAFB;
-  --gray-100: #F3F4F6;
-  --gray-200: #E5E7EB;
-  --gray-300: #D1D5DB;
-  --gray-400: #9CA3AF;
-  --gray-500: #6B7280;
-  --gray-600: #4B5563;
-  --gray-700: #374151;
-  --gray-800: #1F2937;
-  --gray-900: #111827;
+  /* Grayscale - Refined for Deep Dark UI */
+  --gray-50: #F1F1F1;
+  --gray-100: #E2E2E2;
+  --gray-200: #C1C1C1;
+  --gray-300: #8E8E8E;
+  --gray-400: #5F5F5F;
+  --gray-500: #3D3D3D;
+  --gray-600: #2D2D2D;
+  --gray-700: #1A1A1A;
+  --gray-800: #121212;
+  --gray-900: #0A0A0A;
 
-  /* Spacing */
+  /* Spacing - Compact Scale */
   --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-32: 32px;
-  --spacing-40: 40px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
+  --spacing-8: 6px;
+  --spacing-12: 10px;
+  --spacing-16: 12px;
+  --spacing-20: 16px;
+  --spacing-24: 20px;
+  --spacing-32: 24px;
+  --spacing-40: 32px;
+  --spacing-48: 40px;
+  --spacing-64: 56px;
 
   /* Border Radius */
   --radius-sm: 8px;
@@ -49,16 +49,16 @@
   --anim-slow: 400ms;
   --anim-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Typography Scale */
-  --font-hero: 48px;
-  --font-h1: 36px;
-  --font-h2: 30px;
-  --font-h3: 24px;
-  --font-h4: 20px;
-  --font-body-lg: 18px;
-  --font-body: 16px;
-  --font-body-sm: 14px;
-  --font-caption: 12px;
+  /* Typography Scale - Compact */
+  --font-hero: 40px;
+  --font-h1: 28px;
+  --font-h2: 24px;
+  --font-h3: 18px;
+  --font-h4: 16px;
+  --font-body-lg: 15px;
+  --font-body: 13px;
+  --font-body-sm: 12px;
+  --font-caption: 11px;
 
   /* Fonts */
   --font-primary: 'Panchang', sans-serif;

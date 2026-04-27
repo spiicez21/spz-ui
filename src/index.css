@@ -12,15 +12,17 @@
 body {
   font-family: var(--font-secondary);
   font-size: var(--font-body);
-  background-color: var(--color-black);
+  background-color: #050505; /* Deeper black */
   color: var(--color-white);
   min-height: 100vh;
-  line-height: 1.5;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 h1, h2, h3, h4, .font-primary {
   font-family: var(--font-primary);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 button {
@@ -31,36 +33,13 @@ button {
   transition: all var(--anim-fast) var(--anim-ease);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-input, textarea, select {
-  font-family: var(--font-secondary);
-}
-
-/* Utilities */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.gap-8 { gap: var(--gap-8); }
-.gap-12 { gap: var(--gap-12); }
-.gap-16 { gap: var(--gap-16); }
-.gap-24 { gap: var(--gap-24); }
-
-.p-sm { padding: var(--padding-sm); }
-.p-md { padding: var(--padding-md); }
-.p-lg { padding: var(--padding-lg); }
-
-.rounded-sm { border-radius: var(--radius-sm); }
-.rounded-md { border-radius: var(--radius-md); }
-.rounded-lg { border-radius: var(--radius-lg); }
-
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.border-subtle {
+  border: 1px solid var(--gray-800);
 }

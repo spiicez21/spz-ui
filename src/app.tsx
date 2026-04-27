@@ -21,25 +21,23 @@ export function App() {
   const [switchState, setSwitchState] = useState(true)
 
   const tabs = [
-    { id: 'race', label: 'RACING', icon: Activity },
-    { id: 'leaderboard', label: 'LEADERBOARD', icon: Trophy },
-    { id: 'profile', label: 'PROFILE', icon: User },
-    { id: 'settings', label: 'SETTINGS', icon: Settings },
+    { id: 'race', label: 'RACE', icon: Activity },
+    { id: 'leaderboard', label: 'RANK', icon: Trophy },
+    { id: 'profile', label: 'USER', icon: User },
+    { id: 'settings', label: 'OPTS', icon: Settings },
   ]
 
   const leaderboardData = [
-    { rank: 1, name: 'SPICEZ', vehicle: 'Annis Elegy RH8', time: '01:12.450', status: 'live' },
-    { rank: 2, name: 'SHADOW_RACER', vehicle: 'Karin Futo', time: '01:13.820', status: 'finished' },
-    { rank: 3, name: 'GHOST_RIDER', vehicle: 'Bravado Gauntlet', time: '01:14.200', status: 'finished' },
-    { rank: 4, name: 'DRIFT_KING', vehicle: 'Dinka Jester', time: '01:15.110', status: 'finished' },
-    { rank: 5, name: 'TURBO_TOM', vehicle: 'Pegassi Zentorno', time: '01:16.340', status: 'finished' },
+    { rank: 1, name: 'SPICEZ', vehicle: 'ANNIS ELEGY RH8', time: '01:12.45', status: 'live' },
+    { rank: 2, name: 'SHADOW', vehicle: 'KARIN FUTO', time: '01:13.82', status: 'finished' },
+    { rank: 3, name: 'GHOST', vehicle: 'BRAVADO GAUNTLET', time: '01:14.20', status: 'finished' },
   ]
 
   const leaderboardColumns = [
     { key: 'rank', header: '#', align: 'center' },
     { 
       key: 'name', 
-      header: 'RACER', 
+      header: 'DRIVER', 
       render: (val: string) => (
         <div className="flex items-center gap-12">
           <Avatar name={val} size="sm" />
@@ -47,25 +45,11 @@ export function App() {
         </div>
       )
     },
-    { key: 'vehicle', header: 'VEHICLE' },
+    { key: 'vehicle', header: 'MODEL' },
     { 
       key: 'time', 
-      header: 'BEST LAP', 
-      render: (val: string) => (
-        <div className="flex items-center gap-8 text-primary font-primary">
-          <Clock size={14} />
-          {val}
-        </div>
-      )
-    },
-    { 
-      key: 'status', 
-      header: 'STATUS',
-      render: (val: string) => (
-        <Badge variant={val === 'live' ? 'primary' : 'success'} size="sm">
-          {val}
-        </Badge>
-      )
+      header: 'LAP', 
+      render: (val: string) => <span className="text-primary font-primary">{val}</span>
     },
   ]
 
@@ -75,55 +59,61 @@ export function App() {
   }
 
   return (
-    <main className="app-container p-lg">
-      <header className="mb-32 flex items-center justify-between">
-        <div>
-          <h1 className="text-hero mb-8">SPZ CORE UI</h1>
-          <p className="text-gray-400">PREMIUM MOTORSPORT DESIGN SYSTEM</p>
-        </div>
+    <main className="app-container p-lg flex flex-col gap-24">
+      <header className="flex items-center justify-between border-subtle p-md rounded-sm glass">
         <div className="flex items-center gap-16">
-          <Avatar name="John Doe" status="online" size="md" />
+          <h1 className="text-h3 font-primary text-primary">SPZ CORE</h1>
+          <Separator orientation="vertical" className="h-16" />
+          <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} variant="pills" />
+        </div>
+        <div className="flex items-center gap-12">
           <div className="text-right">
-            <div className="font-primary text-body">SPICEZ</div>
-            <div className="text-caption text-primary">ELITE RACER</div>
+            <div className="font-primary text-body-sm">SPICEZ</div>
+            <div className="text-caption text-gray-500">ELITE</div>
           </div>
+          <Avatar name="John Doe" status="online" size="sm" />
         </div>
       </header>
 
-      <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} className="mb-32" />
-
       {activeTab === 'race' && (
-        <div className="flex flex-col gap-32">
-          <section className="grid-3 gap-16">
-            <StatsCard title="TOP SPEED" value="342" unit="KM/H" trend="up" trendValue="12%" icon={Activity} />
-            <StatsCard title="RACES WON" value="128" trend="neutral" trendValue="--" icon={Trophy} />
-            <StatsCard title="TOTAL EARNINGS" value="1.2M" unit="$" trend="up" trendValue="5%" icon={Trophy} />
-          </section>
+        <div className="grid grid-cols-12 gap-24">
+          <div className="col-span-8 flex flex-col gap-24">
+            <section className="grid grid-cols-3 gap-12">
+              <StatsCard title="SPEED" value="342" unit="KMH" trend="up" trendValue="12" icon={Activity} />
+              <StatsCard title="WINS" value="128" icon={Trophy} />
+              <StatsCard title="BANK" value="1.2M" unit="$" trend="up" trendValue="5" icon={Trophy} />
+            </section>
 
-          <section className="grid-2 gap-32">
-            <Card title="RACING HUD" subtitle="Active Modules" variant="glass">
-              <div className="flex flex-col gap-24">
-                <ProgressBar value={75} label="NOS LEVEL" variant="primary" showValue />
-                <ProgressBar value={40} label="FUEL" variant="warning" showValue />
-                <div className="flex gap-16 mt-8">
-                  <Prompt label="BOOST" keys={['SHIFT']} />
-                  <Prompt label="DRIFT" keys={['SPACE']} />
-                  <Prompt label="MAP" button="SELECT" />
+            <Card title="ACTIVE TELEMETRY" variant="glass">
+              <div className="grid grid-cols-2 gap-24">
+                <div className="flex flex-col gap-12">
+                  <ProgressBar value={75} label="NOS" variant="primary" />
+                  <ProgressBar value={40} label="FUEL" variant="warning" />
+                  <ProgressBar value={92} label="HEAT" variant="error" />
+                </div>
+                <div className="flex flex-col gap-8">
+                  <Prompt label="BOOST" keys={['SHIFT']} className="w-full" />
+                  <Prompt label="DRIFT" keys={['SPACE']} className="w-full" />
+                  <Prompt label="MODS" button="SELECT" className="w-full" />
                 </div>
               </div>
             </Card>
+          </div>
 
-            <Card title="GARAGE CONTROLS" subtitle="Vehicle Management" variant="default">
+          <div className="col-span-4 flex flex-col gap-24">
+            <Card title="GARAGE OPTS">
               <div className="flex flex-col gap-16">
-                <Input label="SEARCH VEHICLE" placeholder="Enter name..." icon={Search} />
-                <div className="flex flex-col gap-12 mt-8">
-                  <Switch checked={switchState} onChange={setSwitchState} label="AUTO-REPAIR ENGINE" />
-                  <Switch checked={false} onChange={() => {}} label="ENABLE TELEMETRY LOGS" />
+                <Input placeholder="SEARCH MODEL..." icon={Search} />
+                <div className="flex flex-col gap-8">
+                  <Switch checked={switchState} onChange={setSwitchState} label="AUTO REPAIR" />
+                  <Switch checked={false} onChange={() => {}} label="LOG DATA" />
                 </div>
-                <Button onClick={() => setIsModalOpen(true)} className="mt-16">OPEN VEHICLE STATS</Button>
+                <Separator />
+                <Button onClick={() => setIsModalOpen(true)} className="w-full" variant="secondary">VEHICLE STATS</Button>
+                <Button className="w-full">QUICK RACE</Button>
               </div>
             </Card>
-          </section>
+          </div>
         </div>
       )}
 
@@ -143,7 +133,7 @@ export function App() {
         title="VEHICLE STATISTICS"
         size="lg"
       >
-        <div className="grid-2 gap-24">
+        <div className="grid grid-cols-2 gap-24">
           <div className="flex flex-col gap-16">
             <img src="https://images.unsplash.com/photo-1544636331-e268592033c2?q=80&w=400&auto=format&fit=crop" className="rounded-md" alt="Car" />
             <h3 className="text-h3">ANNIS ELEGY RH8</h3>
@@ -160,45 +150,6 @@ export function App() {
           </div>
         </div>
       </Modal>
-
-      <section className="mb-64">
-        <Card title="TYPOGRAPHY SCALE" subtitle="Panchang & Poppins" variant="outline">
-          <div className="flex flex-col gap-24">
-            <div>
-              <h1 className="text-h1">Heading 1 - 36px</h1>
-              <p className="text-caption text-gray-500 uppercase">Primary Font: Panchang Bold</p>
-            </div>
-            <div>
-              <h2 className="text-h2">Heading 2 - 30px</h2>
-            </div>
-            <div>
-              <h3 className="text-h3">Heading 3 - 24px</h3>
-            </div>
-            <div>
-              <p className="text-body-lg">Body Large - 18px. The quick brown fox jumps over the lazy dog.</p>
-              <p className="text-caption text-gray-500 uppercase">Secondary Font: Poppins Regular</p>
-            </div>
-            <div>
-              <p className="text-body">Body Regular - 16px. Modern automotive UI requires clean typography and generous spacing.</p>
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      <section className="grid-3 gap-16">
-        <Card title="DRIFT" subtitle="Current Score" variant="glass" className="text-center">
-          <div className="text-hero text-primary">12,450</div>
-          <div className="text-caption text-gray-400 mt-8">MULTIPLIER X2.5</div>
-        </Card>
-        <Card title="POSITION" subtitle="Live Standings" variant="glass" className="text-center">
-          <div className="text-hero">04<span className="text-h3 text-gray-500">/24</span></div>
-          <div className="text-caption text-gray-400 mt-8">LAP 2/5</div>
-        </Card>
-        <Card title="ENGINE" subtitle="Telemetry" variant="glass" className="text-center">
-          <div className="text-hero">185<span className="text-h3 text-gray-500">KMH</span></div>
-          <div className="text-caption text-gray-400 mt-8">RPM 7,200</div>
-        </Card>
-      </section>
     </main>
   )
 }
