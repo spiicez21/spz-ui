@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { Badge } from './components/Badge'
+import { ProgressBar } from './components/ProgressBar'
 import './app.css'
 
 export function App() {
@@ -52,6 +53,11 @@ export function App() {
               <Badge variant="secondary" size="sm">ADMIN</Badge>
               <Badge variant="warning" size="sm">PROVISIONAL</Badge>
               <Badge variant="outline" size="sm">OFFLINE</Badge>
+            </div>
+            <div className="flex flex-col gap-8 mt-8">
+              <ProgressBar value={75} label="NOS LEVEL" variant="primary" showValue />
+              <ProgressBar value={40} label="FUEL" variant="warning" showValue />
+              <ProgressBar value={92} label="ENGINE TEMP" variant="error" showValue />
             </div>
           </div>
         </Card>
