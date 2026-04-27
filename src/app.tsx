@@ -5,7 +5,7 @@ import { Badge } from './components/Badge'
 import { ProgressBar } from './components/ProgressBar'
 import { Tabs } from './components/Tabs'
 import { StatsCard } from './components/StatsCard'
-import { Avatar } from './components/Avatar'
+import { Avatar, AvatarGroup } from './components/Avatar'
 import { Modal } from './components/Modal'
 import { Prompt } from './components/Prompt'
 import { Input } from './components/Input'
@@ -91,7 +91,7 @@ export function App() {
             <div className="font-semibold text-body-sm">SPICEZ</div>
             <div className="text-caption text-muted uppercase tracking-wider">ELITE RACER</div>
           </div>
-          <Avatar name="John Doe" status="online" size="sm" />
+          <Avatar name="SPICEZ" status="online" size="sm" />
         </div>
       </header>
 
@@ -205,11 +205,43 @@ export function App() {
             </Card>
 
             <Card title="AVATARS & STATUS">
-              <div className="flex flex-wrap gap-12">
-                <Avatar name="John Doe" size="xl" status="online" />
-                <Avatar name="Jane Smith" size="lg" status="away" />
-                <Avatar name="Admin" size="md" status="busy" />
-                <Avatar name="Guest" size="sm" status="offline" />
+              <div className="flex flex-col" style={{ gap: '20px' }}>
+                <div>
+                  <div className="text-caption text-muted" style={{ marginBottom: '12px' }}>INDIVIDUAL</div>
+                  <div className="flex items-center gap-12">
+                    <Avatar name="John Doe" size="xl" status="online" />
+                    <Avatar name="Jane Smith" size="lg" status="away" />
+                    <Avatar name="Admin" size="md" status="busy" />
+                    <Avatar name="Guest" size="sm" status="offline" />
+                    <Avatar name="RK" size="xs" />
+                  </div>
+                </div>
+                <div className="h-px" style={{ background: 'var(--gray-800)' }} />
+                <div>
+                  <div className="text-caption text-muted" style={{ marginBottom: '12px' }}>GROUPED / STACKED</div>
+                  <div className="flex flex-col" style={{ gap: '16px' }}>
+                    <AvatarGroup
+                      size="sm"
+                      avatars={[
+                        { name: 'SPICEZ' },
+                        { name: 'Shadow' },
+                        { name: 'Ghost' },
+                      ]}
+                    />
+                    <AvatarGroup
+                      size="md"
+                      max={3}
+                      avatars={[
+                        { name: 'SPICEZ' },
+                        { name: 'Shadow' },
+                        { name: 'Ghost' },
+                        { name: 'Drift King' },
+                        { name: 'Racer X' },
+                        { name: 'Night Wolf' },
+                      ]}
+                    />
+                  </div>
+                </div>
               </div>
             </Card>
           </div>
