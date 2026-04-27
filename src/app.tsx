@@ -42,29 +42,30 @@ export function App() {
   ]
 
   const leaderboardData = [
-    { rank: 1, name: 'SPICEZ', vehicle: 'ANNIS ELEGY RH8', time: '01:12.45', status: 'live' },
-    { rank: 2, name: 'SHADOW', vehicle: 'KARIN FUTO', time: '01:13.82', status: 'finished' },
-    { rank: 3, name: 'GHOST', vehicle: 'BRAVADO GAUNTLET', time: '01:14.20', status: 'finished' },
+    { rank: 1, name: 'SPICEZ',    vehicle: 'ANNIS ELEGY RH8',   time: '01:12.45', points: '1,200' },
+    { rank: 2, name: 'SHADOW',    vehicle: 'KARIN FUTO',         time: '01:13.82', points: '980' },
+    { rank: 3, name: 'GHOST',     vehicle: 'BRAVADO GAUNTLET',   time: '01:14.20', points: '870' },
+    { rank: 4, name: 'DRIFT KNG', vehicle: 'VAPID DOMINATOR',    time: '01:15.01', points: '750' },
+    { rank: 5, name: 'RACER X',   vehicle: 'BENEFACTOR SCHAFTER',time: '01:15.88', points: '640' },
+    { rank: 6, name: 'NIGHWOLF',  vehicle: 'OCELOT JACKAL',      time: '01:16.44', points: '520' },
+    { rank: 7, name: 'TURBO99',   vehicle: 'PEGASSI INFERNUS',   time: '01:17.12', points: '410' },
   ]
 
   const leaderboardColumns = [
-    { key: 'rank', header: '#', align: 'center' },
-    { 
-      key: 'name', 
-      header: 'DRIVER', 
+    { key: 'rank',    header: 'Rank',    align: 'left' as const, bold: true },
+    { key: 'name',    header: 'Driver',  align: 'left' as const,
       render: (val: string) => (
         <div className="flex items-center gap-12">
           <Avatar name={val} size="sm" />
-          <span className="font-semibold">{val}</span>
+          <span>{val}</span>
         </div>
       )
     },
-    { key: 'vehicle', header: 'MODEL' },
-    { 
-      key: 'time', 
-      header: 'LAP', 
-      render: (val: string) => <span className="text-primary font-primary">{val}</span>
+    { key: 'vehicle', header: 'Vehicle', align: 'left' as const },
+    { key: 'time',    header: 'Best Lap',align: 'left' as const,
+      render: (val: string) => <span style={{ color: 'var(--color-primary)' }}>{val}</span>
     },
+    { key: 'points',  header: 'Points',  align: 'right' as const, bold: true },
   ]
 
   return (
@@ -131,11 +132,14 @@ export function App() {
       )}
 
       {activeTab === 'leaderboard' && (
-        <Card title="GLOBAL RANKINGS" variant="glass">
-          <Table 
-            columns={leaderboardColumns} 
-            data={leaderboardData} 
-            onRowClick={(row) => console.log('Clicked row', row)} 
+        <Card title="GLOBAL RANKINGS">
+          <Table
+            columns={leaderboardColumns}
+            data={leaderboardData}
+            footer={{ rank: 'Total', points: '5,370' }}
+            caption="Season standings — updated after each race."
+            selectedIndex={0}
+            onRowClick={(row) => console.log('Clicked row', row)}
           />
         </Card>
       )}
