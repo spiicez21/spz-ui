@@ -17,7 +17,8 @@ import { Checkbox } from './components/Checkbox'
 import { Slider } from './components/Slider'
 import { Skeleton } from './components/Skeleton'
 import { Spinner } from './components/Spinner'
-import { Toast, Toaster, ALL_POSITIONS, toast, useToastStore, ToastPosition } from './components/Toast'
+import { Toaster, ALL_POSITIONS, toast, useToastStore } from './components/Toast'
+import type { ToastPosition } from './components/Toast'
 import { Stack } from './components/Stack'
 import { StatNumber } from './components/StatNumber'
 import { Activity, Trophy, Settings, User, Search, Bell, Layout, MousePointer2 } from 'lucide-preact'
@@ -122,7 +123,7 @@ export function App() {
                 </div>
                 <Separator />
                 <Button onClick={() => setIsModalOpen(true)} className="w-full" variant="secondary">VEHICLE STATS</Button>
-                <Button className="w-full" onClick={() => setShowToast(true)}>TRIGGER TOAST</Button>
+                <Button className="w-full" onClick={() => toast({ type: 'success', title: 'System update', message: 'Engine maps successfully updated.', position: 'top-right' })}>TRIGGER TOAST</Button>
               </div>
             </Card>
           </div>
