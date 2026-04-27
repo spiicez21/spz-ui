@@ -6,12 +6,10 @@
 }
 
 .input-label {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-size: var(--font-caption);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--gray-400);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .input-control {
@@ -29,20 +27,19 @@
 
 .input-field {
   width: 100%;
-  background-color: var(--gray-900);
+  background-color: var(--gray-950);
   border: 1px solid var(--gray-800);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  color: var(--color-white);
-  font-size: var(--font-body);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  color: var(--gray-50);
+  font-size: 14px;
   transition: all var(--anim-fast) var(--anim-ease);
   outline: none;
 }
 
 .input-field:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(255, 98, 0, 0.2);
-  background-color: var(--gray-800);
+  border-color: var(--gray-600);
+  background-color: var(--gray-950);
 }
 
 .input-field::placeholder {
@@ -54,16 +51,6 @@
   cursor: not-allowed;
 }
 
-.spz-input-wrapper.has-error .input-field {
-  border-color: #ef4444;
-}
-
-.input-error-msg {
-  font-size: 10px;
-  color: #ef4444;
-  font-weight: 600;
-}
-
 .input-control:has(.input-icon) .input-field {
-  padding-left: 40px;
+  padding-left: 36px;
 }

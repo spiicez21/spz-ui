@@ -8,8 +8,8 @@
 
 .checkbox-wrapper {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .checkbox-wrapper input {
@@ -24,26 +24,25 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: var(--gray-900);
+  height: 16px;
+  width: 16px;
+  background-color: var(--gray-950);
   border: 1px solid var(--gray-700);
   border-radius: 4px;
   transition: all var(--anim-fast) var(--anim-ease);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px;
+  padding: 1px;
 }
 
 .checkbox-wrapper input:checked + .checkbox-mark {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 0 8px rgba(255, 98, 0, 0.4);
+  background-color: var(--gray-50);
+  border-color: var(--gray-50);
 }
 
 .checkbox-mark svg {
-  color: var(--color-white);
+  color: var(--gray-950);
 }
 
 .checkbox-label {
