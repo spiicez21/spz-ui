@@ -44,7 +44,7 @@
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: var(--color-white);
+  background-color: var(--gray-500);
   transition: .2s;
   border-radius: 50%;
 }
@@ -55,6 +55,7 @@ input:checked + .switch-slider {
 
 input:checked + .switch-slider:before {
   transform: translateX(16px);
+  background-color: var(--gray-950);
 }
 
 .spz-switch-container.disabled {

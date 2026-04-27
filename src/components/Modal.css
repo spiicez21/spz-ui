@@ -55,7 +55,7 @@
 }
 
 .modal-close:hover {
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 
 .modal-body {

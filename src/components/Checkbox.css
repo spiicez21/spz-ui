@@ -37,12 +37,12 @@
 }
 
 .checkbox-wrapper input:checked + .checkbox-mark {
-  background-color: var(--gray-50);
-  border-color: var(--gray-50);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .checkbox-mark svg {
-  color: var(--gray-950);
+  color: var(--color-white);
 }
 
 .checkbox-label {
