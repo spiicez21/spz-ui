@@ -1,65 +1,84 @@
+/* ─── Keycap ─────────────────────────────────────────────────────────────── */
+
 .spz-keycap-group {
   display: inline-flex;
-  gap: var(--spacing-4);
+  align-items: center;
+  gap: 4px;
+}
+
+.spz-keycap-sep {
+  font-size: 11px;
+  color: var(--gray-500);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  padding: 0 1px;
 }
 
 .spz-keycap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-700);
+  border-bottom: 2px solid var(--gray-700);  /* depth shadow */
+  border-radius: 8px;
+
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--gray-200);
+  text-transform: none;
+  letter-spacing: 0;
+
+  user-select: none;
+  transition: all 0.1s ease;
+}
+
+/* Pressed state */
+.spz-keycap:active {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
+  background-color: var(--gray-800);
+}
+
+/* Symbol variant — icons/single chars, square */
+.spz-keycap.symbol {
+  min-width: 36px;
+  width: 36px;
+  font-size: 15px;
+  color: var(--gray-300);
+}
+
+/* Small variant */
+.spz-keycap.sm {
   min-width: 28px;
   height: 28px;
-  padding: 0 8px;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-primary);
-  font-weight: 800;
-  font-size: 14px;
-  text-transform: uppercase;
-  box-shadow: 0 3px 0 var(--gray-300);
+  font-size: 11px;
+  border-radius: 6px;
+  padding: 0 7px;
 }
+
+/* ─── Prompt ─────────────────────────────────────────────────────────────── */
 
 .spz-prompt {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
-  background: rgba(0, 0, 0, 0.8);
-  padding: 6px 16px 6px 8px;
-  border-radius: var(--radius-sm);
   width: fit-content;
-  border-left: 3px solid var(--color-primary);
+}
+
+.prompt-trigger {
+  display: flex;
+  align-items: center;
 }
 
 .prompt-label {
   font-family: var(--font-primary);
-  font-size: var(--font-body-sm);
-  color: var(--color-white);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.spz-controller-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  font-family: var(--font-primary);
-  font-weight: 800;
-  font-size: 14px;
-  color: white;
-  border: 2px solid white;
-}
-
-.spz-controller-btn.A { background-color: #10b981; border-color: #059669; }
-.spz-controller-btn.B { background-color: #ef4444; border-color: #b91c1c; }
-.spz-controller-btn.X { background-color: #3b82f6; border-color: #1d4ed8; }
-.spz-controller-btn.Y { background-color: #f59e0b; border-color: #d97706; }
-
-.spz-controller-btn.RT, .spz-controller-btn.LT, .spz-controller-btn.RB, .spz-controller-btn.LB {
-  border-radius: var(--radius-sm);
-  width: 40px;
-  background-color: var(--gray-700);
+  font-size: 13px;
+  color: var(--gray-400);
+  letter-spacing: 0.02em;
 }

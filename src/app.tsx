@@ -249,11 +249,13 @@ export function App() {
           {/* Column 3: Game HUD & Stats */}
           <div className="col-span-4 flex flex-col gap-16">
             <Card title="GAME HUD PROMPTS">
-              <Stack gap={12}>
+              <Stack gap={16}>
                 <Prompt label="ENTER GARAGE" keys={['E']} />
-                <Prompt label="BOOST NITRO" keys={['SHIFT', 'SPACE']} />
-                <Prompt label="SWITCH VIEW" button="Y" />
-                <Prompt label="REAR VIEW" button="RT" />
+                <Prompt label="BOOST NITRO"  keys={['SHIFT', 'SPACE']} />
+                <Prompt label="COMMAND"      keys={['CMD', 'SHIFT', 'P']} />
+                <Prompt label="SWITCH VIEW"  keys={['CTRL', 'B']} />
+                <Prompt label="HANDBRAKE"    keys={['ALT', 'ENTER']} />
+                <Prompt label="LOOK BACK"    keys={['TAB']} />
               </Stack>
             </Card>
 
