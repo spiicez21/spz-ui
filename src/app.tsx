@@ -10,7 +10,9 @@ import { Modal } from './components/Modal'
 import { Prompt } from './components/Prompt'
 import { Input } from './components/Input'
 import { Switch } from './components/Switch'
-import { Activity, Trophy, Settings, User, Mail, Search } from 'lucide-preact'
+import { Table } from './components/Table'
+import { Badge } from './components/Badge'
+import { Activity, Trophy, Settings, User, Mail, Search, Clock } from 'lucide-preact'
 import './app.css'
 
 export function App() {
@@ -24,6 +26,48 @@ export function App() {
     { id: 'leaderboard', label: 'LEADERBOARD', icon: Trophy },
     { id: 'profile', label: 'PROFILE', icon: User },
     { id: 'settings', label: 'SETTINGS', icon: Settings },
+  ]
+
+  const leaderboardData = [
+    { rank: 1, name: 'SPICEZ', vehicle: 'Annis Elegy RH8', time: '01:12.450', status: 'live' },
+    { rank: 2, name: 'SHADOW_RACER', vehicle: 'Karin Futo', time: '01:13.820', status: 'finished' },
+    { rank: 3, name: 'GHOST_RIDER', vehicle: 'Bravado Gauntlet', time: '01:14.200', status: 'finished' },
+    { rank: 4, name: 'DRIFT_KING', vehicle: 'Dinka Jester', time: '01:15.110', status: 'finished' },
+    { rank: 5, name: 'TURBO_TOM', vehicle: 'Pegassi Zentorno', time: '01:16.340', status: 'finished' },
+  ]
+
+  const leaderboardColumns = [
+    { key: 'rank', header: '#', align: 'center' },
+    { 
+      key: 'name', 
+      header: 'RACER', 
+      render: (val: string) => (
+        <div className="flex items-center gap-12">
+          <Avatar name={val} size="sm" />
+          <span className="font-semibold">{val}</span>
+        </div>
+      )
+    },
+    { key: 'vehicle', header: 'VEHICLE' },
+    { 
+      key: 'time', 
+      header: 'BEST LAP', 
+      render: (val: string) => (
+        <div className="flex items-center gap-8 text-primary font-primary">
+          <Clock size={14} />
+          {val}
+        </div>
+      )
+    },
+    { 
+      key: 'status', 
+      header: 'STATUS',
+      render: (val: string) => (
+        <Badge variant={val === 'live' ? 'primary' : 'success'} size="sm">
+          {val}
+        </Badge>
+      )
+    },
   ]
 
   const simulateLoading = () => {
@@ -82,6 +126,16 @@ export function App() {
             </Card>
           </section>
         </div>
+      )}
+
+      {activeTab === 'leaderboard' && (
+        <Card title="GLOBAL LEADERBOARD" subtitle="S1 Race Season" variant="glass">
+          <Table 
+            columns={leaderboardColumns} 
+            data={leaderboardData} 
+            onRowClick={(row) => console.log('Clicked row', row)} 
+          />
+        </Card>
       )}
 
       <Modal 
