@@ -17,27 +17,27 @@ import { Checkbox } from './components/Checkbox'
 import { Slider } from './components/Slider'
 import { Skeleton } from './components/Skeleton'
 import { Spinner } from './components/Spinner'
-import { Toast } from './components/Toast'
+import { Toast, Toaster, ALL_POSITIONS, toast, useToastStore, ToastPosition } from './components/Toast'
 import { Stack } from './components/Stack'
 import { StatNumber } from './components/StatNumber'
 import { Activity, Trophy, Settings, User, Search, Bell, Layout, MousePointer2 } from 'lucide-preact'
 import './app.css'
 
 export function App() {
-  const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('race')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [switchState, setSwitchState] = useState(true)
   const [checkboxState, setCheckboxState] = useState(true)
   const [sliderValue, setSliderValue] = useState(75)
-  const [showToast, setShowToast] = useState(false)
+  const { toasts, remove } = useToastStore()
 
   const tabs = [
-    { id: 'race', label: 'RACE', icon: Activity },
-    { id: 'leaderboard', label: 'RANK', icon: Trophy },
-    { id: 'system', label: 'SYSTEM', icon: Layout },
-    { id: 'spacing', label: 'SPACE', icon: MousePointer2 },
-    { id: 'settings', label: 'OPTS', icon: Settings },
+    { id: 'race',        label: 'RACE',   icon: Activity },
+    { id: 'leaderboard', label: 'RANK',   icon: Trophy },
+    { id: 'system',      label: 'SYSTEM', icon: Layout },
+    { id: 'toast',       label: 'TOAST',  icon: Bell },
+    { id: 'spacing',     label: 'SPACE',  icon: MousePointer2 },
+    { id: 'settings',    label: 'OPTS',   icon: Settings },
   ]
 
   const leaderboardData = [
@@ -68,15 +68,10 @@ export function App() {
 
   return (
     <main className="app-container p-lg flex flex-col gap-24">
-      {showToast && (
-        <div className="fixed top-24 right-24 z-[700]">
-          <Toast
-            type="success"
-            message="Engine maps successfully updated."
-            onClose={() => setShowToast(false)}
-          />
-        </div>
-      )}
+      {/* Toasters for all 9 positions */}
+      {ALL_POSITIONS.map(pos => (
+        <Toaster key={pos} toasts={toasts} onClose={remove} position={pos} />
+      ))}
 
       <header className="flex items-center justify-between border-subtle p-md rounded-lg bg-gray-950">
         <div className="flex items-center gap-16">
@@ -324,8 +319,70 @@ export function App() {
           </div>
         </Card>
       )}
+      {activeTab === 'toast' && (() => {
+        const TYPES: Array<{ type: 'success'|'error'|'warning'|'info', label: string, title: string, msg: string }> = [
+          { type: 'success', label: 'Success', title: 'Race completed!',       msg: 'You finished 1st in the race.' },
+          { type: 'error',   label: 'Error',   title: 'Connection lost',        msg: 'Unable to reach the race server.' },
+          { type: 'warning', label: 'Warning', title: 'Low fuel detected',      msg: 'Pit stop recommended within 2 laps.' },
+          { type: 'info',    label: 'Info',    title: 'Lobby updated',           msg: '3 new players joined the session.' },
+        ]
 
-      <Modal 
+        const POSITIONS: ToastPosition[] = [
+          'top-left','top-center','top-right',
+          'center-left','center','center-right',
+          'bottom-left','bottom-center','bottom-right',
+        ]
+
+        return (
+          <div className="flex flex-col" style={{ gap: '24px' }}>
+            {/* Type variants */}
+            <Card title="TOAST VARIANTS">
+              <div className="grid grid-cols-2" style={{ gap: '12px' }}>
+                {TYPES.map(t => (
+                  <Button
+                    key={t.type}
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => toast({ type: t.type, title: t.title, message: t.msg, position: 'top-right' })}
+                  >
+                    {t.label}
+                  </Button>
+                ))}
+              </div>
+            </Card>
+
+            {/* Position grid */}
+            <Card title="TOAST POSITIONS">
+              <div className="grid grid-cols-3" style={{ gap: '8px' }}>
+                {POSITIONS.map(pos => (
+                  <Button
+                    key={pos}
+                    variant="secondary"
+                    className="w-full"
+                    onClick={() => toast({ type: 'info', title: pos, message: 'Fired from ' + pos, position: pos })}
+                  >
+                    {pos}
+                  </Button>
+                ))}
+              </div>
+            </Card>
+
+            {/* Duration demo */}
+            <Card title="STICKY TOAST">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => toast({ type: 'warning', title: 'Sticky toast', message: 'This will not auto-dismiss.', position: 'bottom-right', duration: 0 })}
+              >
+                Fire sticky (manual dismiss only)
+              </Button>
+            </Card>
+          </div>
+        )
+      })()}
+
+
+      <Modal
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         title="VEHICLE STATISTICS"
