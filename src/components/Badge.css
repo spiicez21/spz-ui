@@ -1,0 +1,50 @@
+.spz-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  font-family: var(--font-primary);
+}
+
+.spz-badge.sm {
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.spz-badge.md {
+  padding: 4px 12px;
+  font-size: var(--font-caption);
+}
+
+.spz-badge.primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.spz-badge.secondary {
+  background-color: var(--gray-700);
+  color: var(--color-white);
+}
+
+.spz-badge.success {
+  background-color: #10b981;
+  color: var(--color-white);
+}
+
+.spz-badge.warning {
+  background-color: #f59e0b;
+  color: var(--color-black);
+}
+
+.spz-badge.error {
+  background-color: #ef4444;
+  color: var(--color-white);
+}
+
+.spz-badge.outline {
+  border: 1px solid var(--gray-600);
+  color: var(--gray-400);
+}

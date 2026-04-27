@@ -1,0 +1,43 @@
+.spz-card {
+  border-radius: var(--radius-md);
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-800);
+  transition: all var(--anim-normal) var(--anim-ease);
+}
+
+.spz-card.glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spz-card.outline {
+  background-color: transparent;
+  border: 1px solid var(--gray-700);
+}
+
+.card-header {
+  margin-bottom: var(--spacing-16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: var(--spacing-12);
+}
+
+.card-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-h4);
+  color: var(--color-white);
+  margin-bottom: var(--spacing-4);
+  letter-spacing: 0.1em;
+}
+
+.card-subtitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-caption);
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-content {
+  color: var(--gray-200);
+}
