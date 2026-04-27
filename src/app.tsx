@@ -36,6 +36,7 @@ export function App() {
     { id: 'race', label: 'RACE', icon: Activity },
     { id: 'leaderboard', label: 'RANK', icon: Trophy },
     { id: 'system', label: 'SYSTEM', icon: Layout },
+    { id: 'spacing', label: 'SPACE', icon: MousePointer2 },
     { id: 'settings', label: 'OPTS', icon: Settings },
   ]
 
@@ -242,6 +243,54 @@ export function App() {
             </Card>
           </div>
         </div>
+      )}
+
+      {activeTab === 'spacing' && (
+        <Card title="DESIGN SYSTEM SPACING SCALE">
+          <div className="flex flex-col" style={{ gap: '32px' }}>
+            <div className="text-body-sm text-gray-400 mb-8" style={{ maxWidth: '600px' }}>
+              Consistent spacing is critical for the 70/20/10 Shadcn aesthetic. 
+              The scale follows a structured progression to ensure perfect vertical and horizontal rhythm.
+            </div>
+            
+            <div className="flex flex-col" style={{ gap: '16px' }}>
+              {[
+                { size: 4, token: '--spacing-4', rem: '0.25rem' },
+                { size: 8, token: '--spacing-8', rem: '0.5rem' },
+                { size: 12, token: '--spacing-12', rem: '0.75rem' },
+                { size: 16, token: '--spacing-16', rem: '1rem' },
+                { size: 20, token: '--spacing-20', rem: '1.25rem' },
+                { size: 24, token: '--spacing-24', rem: '1.5rem' },
+                { size: 32, token: '--spacing-32', rem: '2rem' },
+                { size: 40, token: '--spacing-40', rem: '2.5rem' },
+                { size: 48, token: '--spacing-48', rem: '3rem' },
+                { size: 64, token: '--spacing-64', rem: '4rem' },
+              ].map(space => (
+                <div key={space.size} className="flex items-center border-subtle p-md rounded-md bg-gray-950">
+                  <div className="font-mono text-body-sm text-gray-500" style={{ width: '80px' }}>
+                    {space.size}px
+                  </div>
+                  <div className="font-mono text-body-sm text-gray-300" style={{ width: '140px' }}>
+                    {space.rem}
+                  </div>
+                  <div className="font-mono text-body-sm text-gray-400" style={{ width: '180px' }}>
+                    {space.token}
+                  </div>
+                  <div className="flex-1 flex items-center">
+                    <div 
+                      className="rounded-sm" 
+                      style={{ 
+                        width: `${space.size}px`, 
+                        height: '32px',
+                        backgroundColor: 'var(--color-primary)'
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
       )}
 
       <Modal 
