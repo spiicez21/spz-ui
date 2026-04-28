@@ -84,9 +84,8 @@ export function App() {
       <RadialMenu 
         isOpen={isRadialOpen} 
         onClose={() => setIsRadialOpen(false)}
-        centerIcon="Car"
         items={[
-          { id: 'share', label: 'Share Contact', icon: 'UserPlus', action: () => toast({ title: 'Contact Shared', message: 'Sent details to nearby player.' }) },
+          { id: 'share', label: 'Share Contact', icon: 'UserPlus', action: () => toast({ type: 'info', title: 'Contact Shared', message: 'Sent details to nearby player.' }) },
           { id: 'cuff', label: 'Cuff', icon: 'Lock', action: () => {} },
           { id: 'escort', label: 'Escort', icon: 'UserRound', action: () => {} },
           { id: 'back', label: 'Back', icon: 'ChevronRight', action: () => {} },
@@ -101,7 +100,7 @@ export function App() {
         isOpen={isThirdEyeOpen}
         onToggle={setIsThirdEyeOpen}
         options={[
-          { id: 'inspect', label: 'Inspect Vehicle', icon: 'Search', action: () => toast({ title: 'Inspecting...', message: 'Vehicle data retrieved.' }) },
+          { id: 'inspect', label: 'Inspect Vehicle', icon: 'Search', action: () => toast({ type: 'info', title: 'Inspecting...', message: 'Vehicle data retrieved.' }) },
           { id: 'lock', label: 'Lock/Unlock', icon: 'Lock', action: () => {} },
           { id: 'trunk', label: 'Open Trunk', icon: 'Archive', action: () => {} },
         ]}
@@ -302,7 +301,7 @@ export function App() {
             <Card title="OVERLAYS">
               <Stack gap={12}>
                 <Button variant="outline" className="w-full" onClick={() => setIsModalOpen(true)}>OPEN MODAL</Button>
-                <Button variant="outline" className="w-full" onClick={() => setShowToast(true)}>TRIGGER TOAST</Button>
+                <Button variant="outline" className="w-full" onClick={() => toast({ type: 'info', title: 'HUD Status', message: 'Displaying overlays.' })}>TRIGGER TOAST</Button>
               </Stack>
             </Card>
           </div>
