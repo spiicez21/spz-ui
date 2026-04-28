@@ -21,7 +21,9 @@ import { Toaster, ALL_POSITIONS, toast, useToastStore } from './components/Toast
 import type { ToastPosition } from './components/Toast'
 import { Stack } from './components/Stack'
 import { StatNumber } from './components/StatNumber'
-import { Activity, Trophy, Settings, User, Search, Bell, Layout, MousePointer2 } from 'lucide-preact'
+import { RadialMenu, type RadialMenuItem } from './components/RadialMenu'
+import { ThirdEye, type ThirdEyeOption } from './components/ThirdEye'
+import { Activity, Trophy, Settings, User, Search, Bell, Layout, MousePointer2, Eye } from 'lucide-preact'
 import './app.css'
 
 export function App() {
@@ -30,11 +32,15 @@ export function App() {
   const [switchState, setSwitchState] = useState(true)
   const [checkboxState, setCheckboxState] = useState(true)
   const [sliderValue, setSliderValue] = useState(75)
+  const [isRadialOpen, setIsRadialOpen] = useState(false)
+  const [isThirdEyeVisible, setIsThirdEyeVisible] = useState(false)
+  const [isThirdEyeOpen, setIsThirdEyeOpen] = useState(false)
   const { toasts, remove } = useToastStore()
 
   const tabs = [
     { id: 'race',        label: 'RACE',   icon: Activity },
     { id: 'leaderboard', label: 'RANK',   icon: Trophy },
+    { id: 'hud',         label: 'HUD',    icon: Eye },
     { id: 'system',      label: 'SYSTEM', icon: Layout },
     { id: 'toast',       label: 'TOAST',  icon: Bell },
     { id: 'spacing',     label: 'SPACE',  icon: MousePointer2 },
@@ -74,6 +80,32 @@ export function App() {
       {ALL_POSITIONS.map(pos => (
         <Toaster key={pos} toasts={toasts} onClose={remove} position={pos} />
       ))}
+
+      <RadialMenu 
+        isOpen={isRadialOpen} 
+        onClose={() => setIsRadialOpen(false)}
+        centerIcon="Car"
+        items={[
+          { id: 'share', label: 'Share Contact', icon: 'UserPlus', action: () => toast({ title: 'Contact Shared', message: 'Sent details to nearby player.' }) },
+          { id: 'cuff', label: 'Cuff', icon: 'Lock', action: () => {} },
+          { id: 'escort', label: 'Escort', icon: 'UserRound', action: () => {} },
+          { id: 'back', label: 'Back', icon: 'ChevronRight', action: () => {} },
+          { id: 'takeout', label: 'Take Out Of Veh', icon: 'LogOut', action: () => {} },
+          { id: 'putin', label: 'Put in vehicle', icon: 'LogIn', action: () => {} },
+          { id: 'rob', label: 'Rob', icon: 'Wallet', action: () => {} },
+        ]}
+      />
+
+      <ThirdEye 
+        visible={isThirdEyeVisible}
+        isOpen={isThirdEyeOpen}
+        onToggle={setIsThirdEyeOpen}
+        options={[
+          { id: 'inspect', label: 'Inspect Vehicle', icon: 'Search', action: () => toast({ title: 'Inspecting...', message: 'Vehicle data retrieved.' }) },
+          { id: 'lock', label: 'Lock/Unlock', icon: 'Lock', action: () => {} },
+          { id: 'trunk', label: 'Open Trunk', icon: 'Archive', action: () => {} },
+        ]}
+      />
 
       <header className="flex items-center justify-between border-subtle p-md rounded-lg bg-gray-950">
         <div className="flex items-center gap-16">
@@ -385,6 +417,49 @@ export function App() {
           </div>
         )
       })()}
+
+      {activeTab === 'hud' && (
+        <div className="grid grid-cols-12 gap-16">
+          <div className="col-span-6 flex flex-col gap-16">
+            <Card title="RADIAL MENU">
+              <Stack gap={16}>
+                <div className="text-body-sm text-gray-400">
+                  A high-performance hexagonal radial menu inspired by ox-lib and qb-core. 
+                  Optimized for quick selection and premium aesthetics.
+                </div>
+                <Button className="w-full" onClick={() => setIsRadialOpen(true)}>OPEN RADIAL MENU</Button>
+                <div className="flex items-center gap-12 text-caption text-muted">
+                  <Prompt keys={['TAB']} label="TYPICAL BIND" />
+                  <span>OR ESC TO CLOSE</span>
+                </div>
+              </Stack>
+            </Card>
+          </div>
+
+          <div className="col-span-6 flex flex-col gap-16">
+            <Card title="THIRD EYE (TARGET)">
+              <Stack gap={16}>
+                <div className="text-body-sm text-gray-400">
+                  Modern interaction menu. Toggle visibility to simulate finding a target, 
+                  then click or hold to expand options.
+                </div>
+                <div className="flex gap-12">
+                  <Button className="flex-1" onClick={() => setIsThirdEyeVisible(!isThirdEyeVisible)}>
+                    {isThirdEyeVisible ? 'HIDE THIRD EYE' : 'SHOW THIRD EYE'}
+                  </Button>
+                  <Button variant="secondary" className="flex-1" onClick={() => setIsThirdEyeOpen(!isThirdEyeOpen)} disabled={!isThirdEyeVisible}>
+                    TOGGLE MENU
+                  </Button>
+                </div>
+                <div className="flex items-center gap-12 text-caption text-muted">
+                  <Prompt keys={['ALT']} label="TYPICAL BIND" />
+                  <span>FOR VISIBILITY</span>
+                </div>
+              </Stack>
+            </Card>
+          </div>
+        </div>
+      )}
 
 
       <Modal
