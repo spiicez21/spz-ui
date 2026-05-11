@@ -56,6 +56,11 @@ AddStateBagChangeHandler("firstTime", nil, function(bagName, key, value)
   if source ~= GetPlayerServerId(PlayerId()) then return end
   if not value then return end
 
+  -- Ensure loading screen is gone so we can see the UI
+  ShutdownLoadingScreen()
+  ShutdownLoadingScreenNui()
+  DoScreenFadeIn(500)
+
   -- Open character creation
   TriggerEvent("SPZ:openCharacterCreation")
 end)
