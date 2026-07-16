@@ -27,7 +27,7 @@ Located in `src/components/`:
 
 ## Usage
 
-Components are consumed by all UI resources (`spz-carspawner`, `spz-leaderboard`, `spz-speedometer`, `spz-nametag`, `spz-spawn`, `spz-poll`, `spz-raceUI`, `spz-stance`, `spz-loading`). The build pipeline copies the `src/components/` and `src/styles/` contents into each resource before compiling.
+Components are consumed by all UI resources (`spz-carspawner`, `spz-leaderboard`, `spz-speedometer`, `spz-nametag`, `spz-spawn`, `spz-poll`, `spz-raceUI`, `spz-loading`). The build pipeline copies the `src/components/` and `src/styles/` contents into each resource before compiling.
 
 ## CI
 Built and released via `.github/workflows/release.yml` on push to `main`.
