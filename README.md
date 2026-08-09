@@ -1,33 +1,46 @@
 # spz-ui
-> spz-ui design system — shared TypeScript component library
 
-spz-ui is **not a FiveM resource** and has no `fxmanifest.lua`. It is a TypeScript component library that provides the shared UI design system for all SPZ NUI resources. Components are copied into each resource's `ui/src/components/` directory at build time.
+> Shared NUI design system and state listeners · `v2.0.0`
+
+## Overview
+
+`spz-ui` is two things:
+
+1. A **TypeScript component library** — the design system every SPZ NUI resource is built
+   from. Components and styles are copied into each resource's `ui/src/` at build time
+   rather than imported at runtime, so each NUI ships self-contained.
+2. A **thin FiveM resource** — `client/state_listeners.lua` mirrors framework state into
+   the UI layer so components can react without each resource wiring its own listeners.
 
 ## Components
 
-Located in `src/components/`:
+`src/components/`:
 
-- `Button` — primary, secondary, ghost variants
-- `Badge` — status and label badges
-- `Input` — text input with validation states
-- `Card` — content container
-- `Modal` — overlay dialog
-- `Tabs` — tabbed navigation
-- `Toast` — notification toasts
-- `Slider` — range slider input
-- `Avatar` — player avatar display
+`Avatar` · `Badge` · `Button` · `Card` · `Checkbox` · `IconButton` · `Input` · `Modal` ·
+`ProgressBar` · `Prompt` · `RadialMenu` · `Separator` · `Skeleton` · `Slider` · `Spinner` ·
+`Stack` · `StatNumber` · `StatsCard` · `Switch` · `Table` · `Tabs` · `ThirdEye` · `Toast`
 
-## Design Tokens
+Each ships as a `.tsx` plus a matching `.css`.
 
-| File                     | Purpose                                      |
-| ------------------------ | -------------------------------------------- |
-| `src/styles/theme.css`   | CSS custom properties (colors, spacing, etc.)|
-| `src/styles/fonts.css`   | Font face declarations                       |
-| `src/styles/nui-base.css`| Base reset and NUI-specific global styles    |
+## Design tokens
 
-## Usage
+| File | Purpose |
+|---|---|
+| `src/styles/theme.css` | CSS custom properties — colours, spacing, radii, elevation |
+| `src/styles/fonts.css` | Font face declarations |
+| `src/styles/nui-base.css` | Reset and NUI-specific globals |
 
-Components are consumed by all UI resources (`spz-carspawner`, `spz-leaderboard`, `spz-speedometer`, `spz-nametag`, `spz-spawn`, `spz-poll`, `spz-raceUI`, `spz-loading`). The build pipeline copies the `src/components/` and `src/styles/` contents into each resource before compiling.
+## Consumers
 
-## CI
-Built and released via `.github/workflows/release.yml` on push to `main`.
+`spz-spawn` · `spz-raceUI` · `spz-poll` · `spz-nametag` · `spz-speedometer` ·
+`spz-loading` · `spz-carspawner`
+
+Copy `src/components/` and `src/styles/` into the resource's `ui/src/` before building it.
+
+## Dependencies
+
+`ox_lib` · `spz-core`
+
+---
+
+Part of [SPiceZ-Core](../README.md) · GPL-3.0
